@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="tansiyonSeker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abf-5V-2cc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="LID-5S-Ekq"/>
+                                    <constraint firstAttribute="height" constant="44" id="NhK-6z-HiA"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="NURAY KİŞİ" id="XXb-Lx-MXB">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="f3h-7A-an2">
+                                            <imageReference key="image" image="plus" catalog="system" renderingMode="original"/>
+                                            <connections>
+                                                <action selector="addBarButtonClicked:" destination="BYZ-38-t0r" id="2gM-o6-h7r"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TeG-Ix-al9">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="623" id="2v0-HT-kSa"/>
+                                    <constraint firstAttribute="width" constant="375" id="z3d-gQ-BRG"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TeG-Ix-al9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2nc-iU-oEj"/>
+                            <constraint firstItem="TeG-Ix-al9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="4yd-99-c2u"/>
+                            <constraint firstItem="TeG-Ix-al9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7dK-tv-7uv"/>
+                            <constraint firstItem="abf-5V-2cc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FMb-UU-lQx"/>
+                            <constraint firstItem="abf-5V-2cc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="nBV-fu-zta"/>
+                            <constraint firstItem="TeG-Ix-al9" firstAttribute="top" secondItem="abf-5V-2cc" secondAttribute="bottom" id="vEP-ed-674"/>
+                            <constraint firstItem="TeG-Ix-al9" firstAttribute="top" secondItem="abf-5V-2cc" secondAttribute="bottom" id="wOC-GW-ci6"/>
+                            <constraint firstItem="abf-5V-2cc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xMB-fd-VdA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addDataBarButton" destination="f3h-7A-an2" id="8Ei-Tf-atu"/>
+                        <outlet property="feedNavigationBar" destination="abf-5V-2cc" id="WfT-Pl-XgE"/>
+                        <outlet property="feedTableView" destination="TeG-Ix-al9" id="WTf-BE-HXZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="34.399999999999999" y="93.103448275862078"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

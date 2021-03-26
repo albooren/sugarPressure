@@ -1,0 +1,6 @@
+framework module Pods_tansiyonSeker {
+  umbrella header "Pods-tansiyonSeker-umbrella.h"
+
+  export *
+  module * { export * }
+}
