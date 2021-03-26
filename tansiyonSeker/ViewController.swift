@@ -76,31 +76,30 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 let bigTansiyonLabel = UILabel()
                 bigTansiyonLabel.text = "Büyük"
                 bigTansiyonLabel.sizeToFit()
-                bigTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 0.20, y: pickerViev.frame.height * 0.20, width: bigTansiyonLabel.frame.width + 0.90, height: bigTansiyonLabel.frame.height)
+                bigTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 0.15, y: pickerViev.frame.height * 0.20, width: bigTansiyonLabel.frame.width + 0.90, height: bigTansiyonLabel.frame.height)
                 tansiyonPickerView.addSubview(bigTansiyonLabel)
             }
             return String(tansiyonBigArray[row])
         case 1:
             secondComponentCounter += 1
-            if firstComponentCounter == 1 {
+            if secondComponentCounter == 1 {
                 let kucukTansiyonLabel = UILabel()
                 kucukTansiyonLabel.text = "Küçük"
                 kucukTansiyonLabel.sizeToFit()
                 kucukTansiyonLabel.textAlignment = NSTextAlignment.center
-                kucukTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 0.75, y: pickerViev.frame.height * 0.20, width: kucukTansiyonLabel.frame.width+2, height: kucukTansiyonLabel.frame.height)
+                kucukTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 1, y: pickerViev.frame.height * 0.20, width: kucukTansiyonLabel.frame.width + 2, height: kucukTansiyonLabel.frame.height)
                 tansiyonPickerView.addSubview(kucukTansiyonLabel)
             }
             return String(tansiyonLittleArray[row])
         default:
-            break
+            return ""
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return tansiyonBigArray.count
-        }
-        else {
+        } else {
             return tansiyonLittleArray.count
         }
     }
