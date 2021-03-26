@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TO DO: Move the delegates to new extension your created...
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -17,7 +18,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var containerView = UIView()
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
-    var sekerDurumArray = ["Aç","Tok"]
+    var sekerDurumArray = ["Aç", "Tok"]
     var sekerStatusArray = Array(1...300)
     var firstComponentCounter = 0
     var secondComponentCounter = 0
@@ -40,6 +41,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         callAddSheet()
     }
     
+    // TO DO: Please move localizable texts to new class...
     func callAddSheet() {
         let chooseSheet = UIAlertController(title: "Girmek istediğin bilgiyi seçiniz!", message: nil, preferredStyle: .actionSheet)
         chooseSheet.addAction(UIAlertAction(title: "Tansiyon", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
@@ -68,27 +70,26 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return 2
     }
     
+    func setLabelForComponents(text: String, xValue: CGFloat, yValue: CGFloat) {
+        let label = UILabel()
+        label.text = text
+        label.sizeToFit()
+        label.frame = CGRect(x: xValue, y: yValue, width: label.frame.width + 1.5, height: label.frame.height)
+        tansiyonPickerView.addSubview(label)
+    }
+    
     func pickerView(_ pickerViev: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
             firstComponentCounter += 1
             if firstComponentCounter == 1 {
-                let bigTansiyonLabel = UILabel()
-                bigTansiyonLabel.text = "Büyük"
-                bigTansiyonLabel.sizeToFit()
-                bigTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 0.15, y: pickerViev.frame.height * 0.20, width: bigTansiyonLabel.frame.width + 0.90, height: bigTansiyonLabel.frame.height)
-                tansiyonPickerView.addSubview(bigTansiyonLabel)
+                setLabelForComponents(text: "Büyük", xValue: pickerViev.frame.width * 0.15, yValue: pickerViev.frame.height * 0.20)
             }
             return String(tansiyonBigArray[row])
         case 1:
             secondComponentCounter += 1
             if secondComponentCounter == 1 {
-                let kucukTansiyonLabel = UILabel()
-                kucukTansiyonLabel.text = "Küçük"
-                kucukTansiyonLabel.sizeToFit()
-                kucukTansiyonLabel.textAlignment = NSTextAlignment.center
-                kucukTansiyonLabel.frame = CGRect(x: pickerViev.frame.width * 1, y: pickerViev.frame.height * 0.20, width: kucukTansiyonLabel.frame.width + 2, height: kucukTansiyonLabel.frame.height)
-                tansiyonPickerView.addSubview(kucukTansiyonLabel)
+                setLabelForComponents(text: "Küçük", xValue: pickerViev.frame.width * 1, yValue: pickerViev.frame.height * 0.20)
             }
             return String(tansiyonLittleArray[row])
         default:
@@ -132,6 +133,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // TO DO: Please use optional type... You can delete "!" operator.
         let cell = Bundle.main.loadNibNamed("saveTableViewCell", owner: ViewController.self, options: nil)?.first as! saveTableViewCell
         cell.tansiyonSekerLabel.text = "T:120/85 N:85"
         cell.dateHourLabel.text = "26/02 00:02"
