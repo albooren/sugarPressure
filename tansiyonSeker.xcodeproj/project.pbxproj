@@ -108,7 +108,6 @@
 				C977C95C25E7C213001C8368 /* Sources */,
 				C977C95D25E7C213001C8368 /* Frameworks */,
 				C977C95E25E7C213001C8368 /* Resources */,
-				4C39148A0924D2B07FC4B5BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,23 +165,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4C39148A0924D2B07FC4B5BD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8562BADCEE78D236FF08F6FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
