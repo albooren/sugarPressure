@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         tansiyonPickerView.tag = 0
         sekerPickerView.tag = 1
         
-        setDefaultValueForTansiyonPicker()
+        setDefaultValueForTansiyonandSekerPicker()
         
     }
     
@@ -70,8 +70,12 @@ class ViewController: UIViewController {
         makePicker(title: ValueClass.sekerString, input: sekerPickerView)
     }
     
-    @objc func doneTapped(){
-        
+    @objc func doneTapped() {
+        print("doneTapped")
+    }
+    
+    @objc func dismissTapped() {
+        dismiss(animated: true, completion: nil)
     }
 
     func setLabelForComponents(text: String, xValue: CGFloat, yValue: CGFloat) {
@@ -81,28 +85,29 @@ class ViewController: UIViewController {
         label.frame = CGRect(x: xValue, y: yValue, width: label.frame.width + 1.5, height: label.frame.height)
         if sekerOrTansiyonCounter == 0 {
             tansiyonPickerView.addSubview(label)
-        }
-        else {
+        } else {
             sekerPickerView.addSubview(label)
         }
     }
    
-    func makePicker(title : String,input : UIPickerView){
+    func makePicker(title: String ,input: UIPickerView) {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alertController.addTextField { (textField) in
+        alertController.addTextField { [weak self] (textField) in
+            guard let self = self else { return }
             let toolbar = UIToolbar()
             toolbar.barStyle = .default
             toolbar.isTranslucent = true
             toolbar.tintColor = .black
             toolbar.sizeToFit()
             let doneButton = UIBarButtonItem(title: ValueClass.saveButtonString, style: .plain, target: self, action: #selector(self.doneTapped))
-            toolbar.setItems([doneButton], animated: true)
+            let exitButton = UIBarButtonItem(title: "Vazgeç", style: .done, target: self, action: #selector(self.dismissTapped))
+            toolbar.setItems([exitButton, doneButton], animated: true)
             toolbar.isUserInteractionEnabled = true
             textField.inputView = input
             textField.inputAccessoryView = toolbar
         }
         // - TO DO - handler will be process
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -116,11 +121,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TO DO: Please use optional type... You can delete "!" operator.
-        let cell = Bundle.main.loadNibNamed("saveTableViewCell", owner: ViewController.self, options: nil)?.first as! saveTableViewCell
-        cell.tansiyonSekerLabel.text = "T:120/85 N:85"
-        cell.dateHourLabel.text = "26/02 00:02"
-        return cell
+        // TO DO: Class name change to "SaveTableViewCell"
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "saveTableViewCell") as? saveTableViewCell {
+            cell.tansiyonSekerLabel.text = "T:120/85 N:85"
+            cell.dateHourLabel.text = "26/02 00:02"
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 }
 
@@ -199,15 +207,15 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
                     setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 1, yValue: pickerViev.frame.height * 0.45)
                     }
                 return String(sekerdegerArray[row])
-            default: return ""
+            default:
+                return ""
             }
-        default: return ""
+        default:
+            return ""
         }
     }
-
-    
-    func setDefaultValueForTansiyonPicker(){
-        tansiyonPickerView.selectRow(119, inComponent: 0, animated: true)
+    func setDefaultValueForTansiyonandSekerPicker(){
+        tansiyonPickerView.selectRow(220, inComponent: 0, animated: true)
         tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
         tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
         sekerPickerView.selectRow(0, inComponent: 0, animated: true)
