@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         tansiyonPickerView.tag = 0
         sekerPickerView.tag = 1
         
-//        setDefaultValueForTansiyonPicker()
+        setDefaultValueForTansiyonPicker()
         
     }
     
@@ -50,14 +50,12 @@ class ViewController: UIViewController {
         callAddSheet()
     }
     
-    // TO DO: Please move localizable texts to new class...
     func callAddSheet() {
         let chooseSheet = UIAlertController(title: ValueClass.pickValueSheetString , message: nil, preferredStyle: .actionSheet)
         chooseSheet.addAction(UIAlertAction(title: ValueClass.tansiyonString, style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
             self.tansiyonEkle(action: UIAlertAction)
         }))
         chooseSheet.addAction(UIAlertAction(title: ValueClass.sekerString, style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
-            self.sekerOrTansiyonCounter += 1
             self.sekerEkle(action: UIAlertAction)
         }))
         chooseSheet.addAction(UIAlertAction(title: ValueClass.exitString, style: .cancel))
@@ -73,15 +71,7 @@ class ViewController: UIViewController {
     }
     
     @objc func doneTapped(){
-        switch sekerOrTansiyonCounter {
-        case 0:
-            print(ValueClass.tansiyonString)
-        case 1 :
-            print(ValueClass.sekerString)
-        default:
-            print(ValueClass.errorString)
-        }
-        view.endEditing(true)
+        
     }
 
     func setLabelForComponents(text: String, xValue: CGFloat, yValue: CGFloat) {
@@ -170,12 +160,9 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
                 default:
                     return 0
             }
-        default:
-            return 1
+        default: return 1
         }
-        
     }
-    
     func pickerView(_ pickerViev: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerViev.tag {
         case 0:
@@ -204,28 +191,26 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
         case 1:
             switch component {
             case 0:
-                fourthComponentCounter += 1
-                if fourthComponentCounter == 1 {
-                    setLabelForComponents(text: ValueClass.sekerAcTokString, xValue: pickerViev.frame.width * 0.25, yValue: pickerViev.frame.height * 0.05)
-                }
                 return String(sekeractokArray[row])
             case 1:
                 fifthComponentCounter += 1
                 if fifthComponentCounter == 1 {
+                    sekerOrTansiyonCounter = 1
                     setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 1, yValue: pickerViev.frame.height * 0.45)
-                }
+                    }
                 return String(sekerdegerArray[row])
+            default: return ""
+            }
         default: return ""
         }
-        default: return ""
-        }
-    
-        
     }
+
     
-//    func setDefaultValueForTansiyonPicker(){
-//        tansiyonPickerView.selectRow(119, inComponent: 0, animated: true)
-//        tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
-//        tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
-        
+    func setDefaultValueForTansiyonPicker(){
+        tansiyonPickerView.selectRow(119, inComponent: 0, animated: true)
+        tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
+        tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
+        sekerPickerView.selectRow(0, inComponent: 0, animated: true)
+        sekerPickerView.selectRow(69, inComponent: 1, animated: true)
+    }
 }
