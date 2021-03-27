@@ -16,6 +16,7 @@
 		C977C96B25E7C213001C8368 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C977C96925E7C213001C8368 /* Main.storyboard */; };
 		C977C96D25E7C215001C8368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C977C96C25E7C215001C8368 /* Assets.xcassets */; };
 		C977C97025E7C215001C8368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C977C96E25E7C215001C8368 /* LaunchScreen.storyboard */; };
+		C9A62E8E260F5A94007BDCC1 /* ValueClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		C977C96C25E7C215001C8368 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C977C96F25E7C215001C8368 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C977C97125E7C215001C8368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				C977C96325E7C213001C8368 /* AppDelegate.swift */,
 				C977C96525E7C213001C8368 /* SceneDelegate.swift */,
+				C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */,
 				C977C96725E7C213001C8368 /* ViewController.swift */,
 				C968E6A325E8463200A05D11 /* saveTableViewCell.swift */,
 				C968E6A425E8463200A05D11 /* saveTableViewCell.xib */,
@@ -198,6 +201,7 @@
 				C977C96825E7C213001C8368 /* ViewController.swift in Sources */,
 				C977C96425E7C213001C8368 /* AppDelegate.swift in Sources */,
 				C977C96625E7C213001C8368 /* SceneDelegate.swift in Sources */,
+				C9A62E8E260F5A94007BDCC1 /* ValueClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

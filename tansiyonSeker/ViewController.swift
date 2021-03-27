@@ -7,9 +7,7 @@
 
 import UIKit
 
-// TO DO: Move the delegates to new extension your created...
-
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet var feedTableView: UITableView!
     @IBOutlet var feedNavigationBar: UINavigationBar!
@@ -18,10 +16,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var containerView = UIView()
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
-    var sekerDurumArray = ["Aç", "Tok"]
-    var sekerStatusArray = Array(1...300)
+    var heartBeatArray = Array(45...160)
+    var sekeractokArray = ["Aç", "Tok"]
+    var sekerdegerArray = Array(1...300)
     var firstComponentCounter = 0
     var secondComponentCounter = 0
+    var thirdComponentCounter = 0
+    var fourthComponentCounter = 0
+    var fifthComponentCounter = 0
+    
+    var sekerOrTansiyonCounter = 0
     
     let tansiyonPickerView = UIPickerView()
     let sekerPickerView = UIPickerView()
@@ -35,6 +39,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         tansiyonPickerView.dataSource = self
         sekerPickerView.delegate = self
         sekerPickerView.dataSource = self
+        tansiyonPickerView.tag = 0
+        sekerPickerView.tag = 1
+        
+//        setDefaultValueForTansiyonPicker()
+        
     }
     
     @IBAction func addBarButtonClicked(_ sender: Any) {
@@ -43,68 +52,51 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // TO DO: Please move localizable texts to new class...
     func callAddSheet() {
-        let chooseSheet = UIAlertController(title: "Girmek istediğin bilgiyi seçiniz!", message: nil, preferredStyle: .actionSheet)
-        chooseSheet.addAction(UIAlertAction(title: "Tansiyon", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+        let chooseSheet = UIAlertController(title: ValueClass.pickValueSheetString , message: nil, preferredStyle: .actionSheet)
+        chooseSheet.addAction(UIAlertAction(title: ValueClass.tansiyonString, style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
             self.tansiyonEkle(action: UIAlertAction)
         }))
-        chooseSheet.addAction(UIAlertAction(title: "Şeker", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+        chooseSheet.addAction(UIAlertAction(title: ValueClass.sekerString, style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.sekerOrTansiyonCounter += 1
             self.sekerEkle(action: UIAlertAction)
         }))
-        chooseSheet.addAction(UIAlertAction(title: "Çık", style: .cancel))
+        chooseSheet.addAction(UIAlertAction(title: ValueClass.exitString, style: .cancel))
         present(chooseSheet, animated: true)
     }
     
     func tansiyonEkle(action:UIAlertAction){
-        makePicker(title: "Tansiyon Ekle!", input: tansiyonPickerView)
+        makePicker(title: ValueClass.tansiyonAddString, input: tansiyonPickerView)
     }
     
     func sekerEkle(action:UIAlertAction){
-        makePicker(title: "Şeker Ekle!", input: sekerPickerView)
+        makePicker(title: ValueClass.sekerString, input: sekerPickerView)
     }
     
     @objc func doneTapped(){
-        print("Tapped")
+        switch sekerOrTansiyonCounter {
+        case 0:
+            print(ValueClass.tansiyonString)
+        case 1 :
+            print(ValueClass.sekerString)
+        default:
+            print(ValueClass.errorString)
+        }
+        view.endEditing(true)
     }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
+
     func setLabelForComponents(text: String, xValue: CGFloat, yValue: CGFloat) {
         let label = UILabel()
         label.text = text
         label.sizeToFit()
         label.frame = CGRect(x: xValue, y: yValue, width: label.frame.width + 1.5, height: label.frame.height)
-        tansiyonPickerView.addSubview(label)
-    }
-    
-    func pickerView(_ pickerViev: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
-            firstComponentCounter += 1
-            if firstComponentCounter == 1 {
-                setLabelForComponents(text: "Büyük", xValue: pickerViev.frame.width * 0.15, yValue: pickerViev.frame.height * 0.20)
-            }
-            return String(tansiyonBigArray[row])
-        case 1:
-            secondComponentCounter += 1
-            if secondComponentCounter == 1 {
-                setLabelForComponents(text: "Küçük", xValue: pickerViev.frame.width * 1, yValue: pickerViev.frame.height * 0.20)
-            }
-            return String(tansiyonLittleArray[row])
-        default:
-            return ""
+        if sekerOrTansiyonCounter == 0 {
+            tansiyonPickerView.addSubview(label)
+        }
+        else {
+            sekerPickerView.addSubview(label)
         }
     }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return tansiyonBigArray.count
-        } else {
-            return tansiyonLittleArray.count
-        }
-    }
-    
+   
     func makePicker(title : String,input : UIPickerView){
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField) in
@@ -113,7 +105,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             toolbar.isTranslucent = true
             toolbar.tintColor = .black
             toolbar.sizeToFit()
-            let doneButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(self.doneTapped))
+            let doneButton = UIBarButtonItem(title: ValueClass.saveButtonString, style: .plain, target: self, action: #selector(self.doneTapped))
             toolbar.setItems([doneButton], animated: true)
             toolbar.isUserInteractionEnabled = true
             textField.inputView = input
@@ -123,6 +115,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
 
 // MARK: - ViewController: UITableViewDataSource, UITableViewDelegate -
 
@@ -139,4 +132,100 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         cell.dateHourLabel.text = "26/02 00:02"
         return cell
     }
+}
+
+// MARK: - ViewController : UIPickerViewDataSource, UIPickerViewDelegate -
+
+extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        switch pickerView.tag {
+        case 0:
+            return 3
+        case 1:
+            return 2
+        default:
+            return 1
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch pickerView.tag {
+        case 0:
+            switch component {
+                case 0:
+                    return tansiyonBigArray.count
+                case 1 :
+                    return tansiyonLittleArray.count
+                case 2:
+                    return heartBeatArray.count
+            default:
+                return 0
+            }
+        case 1 :
+            switch component {
+                case 0:
+                    return sekeractokArray.count
+                case 1 :
+                    return sekerdegerArray.count
+                default:
+                    return 0
+            }
+        default:
+            return 1
+        }
+        
+    }
+    
+    func pickerView(_ pickerViev: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerViev.tag {
+        case 0:
+            switch component {
+            case 0:
+                firstComponentCounter += 1
+                if firstComponentCounter == 1 {
+                    setLabelForComponents(text: ValueClass.bigtansiyonString, xValue: pickerViev.frame.width * 0.05, yValue: pickerViev.frame.height * 0.05)
+                }
+                return String(tansiyonBigArray[row])
+            case 1:
+                secondComponentCounter += 1
+                if secondComponentCounter == 1 {
+                    setLabelForComponents(text: ValueClass.littletansiyonString, xValue: pickerViev.frame.width * 0.45, yValue: pickerViev.frame.height * 0.05)
+                }
+                return String(tansiyonLittleArray[row])
+            case 2 :
+                thirdComponentCounter += 1
+                if thirdComponentCounter == 1 {
+                    setLabelForComponents(text: ValueClass.heartBeatString, xValue: pickerViev.frame.width * 0.90, yValue: pickerViev.frame.height * 0.05)
+                }
+                return String(heartBeatArray[row])
+            default:
+                return ""
+            }
+        case 1:
+            switch component {
+            case 0:
+                fourthComponentCounter += 1
+                if fourthComponentCounter == 1 {
+                    setLabelForComponents(text: ValueClass.sekerAcTokString, xValue: pickerViev.frame.width * 0.25, yValue: pickerViev.frame.height * 0.05)
+                }
+                return String(sekeractokArray[row])
+            case 1:
+                fifthComponentCounter += 1
+                if fifthComponentCounter == 1 {
+                    setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 1, yValue: pickerViev.frame.height * 0.45)
+                }
+                return String(sekerdegerArray[row])
+        default: return ""
+        }
+        default: return ""
+        }
+    
+        
+    }
+    
+//    func setDefaultValueForTansiyonPicker(){
+//        tansiyonPickerView.selectRow(119, inComponent: 0, animated: true)
+//        tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
+//        tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
+        
 }
