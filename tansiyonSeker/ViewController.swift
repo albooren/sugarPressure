@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     var fifthComponentCounter = 0
     
     var sekerOrTansiyonCounter = 0
+    var sekerOrTansiyonSavedCounter = 0
     
     let tansiyonPickerView = UIPickerView()
     let sekerPickerView = UIPickerView()
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
             self.tansiyonEkle(action: UIAlertAction)
         }))
         chooseSheet.addAction(UIAlertAction(title: ValueClass.sekerString, style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
+            self.sekerOrTansiyonSavedCounter = 1
             self.sekerEkle(action: UIAlertAction)
         }))
         chooseSheet.addAction(UIAlertAction(title: ValueClass.exitString, style: .cancel))
@@ -70,8 +72,22 @@ class ViewController: UIViewController {
         makePicker(title: ValueClass.sekerString, input: sekerPickerView)
     }
     
+    // TO DO -- Keep time, Save all collected data in UserDefaults --
+    
     @objc func doneTapped() {
-        print("doneTapped")
+        switch sekerOrTansiyonSavedCounter {
+        case 0:
+            let bigTansiyonSaved = tansiyonBigArray[tansiyonPickerView.selectedRow(inComponent: 0)]
+            let littleTansiyonSaved = tansiyonLittleArray[tansiyonPickerView.selectedRow(inComponent: 1)]
+            let heartBeatSaved = heartBeatArray[tansiyonPickerView.selectedRow(inComponent: 2)]
+            print("B:\(bigTansiyonSaved) K:\(littleTansiyonSaved) N:\(heartBeatSaved) ")
+        case 1:
+            let sekerAcTokSaved = sekeractokArray[sekerPickerView.selectedRow(inComponent: 0)]
+            let sekerDegerSaved = sekerdegerArray[sekerPickerView.selectedRow(inComponent: 1)]
+            print("\(sekerAcTokSaved) Şeker : \(sekerDegerSaved)")
+        default:
+            print("Error")
+        }
     }
     
     @objc func dismissTapped() {
@@ -123,8 +139,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TO DO: Class name change to "SaveTableViewCell"
         if let cell = tableView.dequeueReusableCell(withIdentifier: "saveTableViewCell") as? saveTableViewCell {
-            cell.tansiyonSekerLabel.text = "T:120/85 N:85"
-            cell.dateHourLabel.text = "26/02 00:02"
+            cell.tansiyonSekerLabel?.text = "T:120/85 N:85"
+            cell.dateHourLabel?.text = "26/02 00:02"
             return cell
         } else {
             return UITableViewCell()
@@ -214,11 +230,13 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
             return ""
         }
     }
+    
     func setDefaultValueForTansiyonandSekerPicker(){
-        tansiyonPickerView.selectRow(220, inComponent: 0, animated: true)
+        tansiyonPickerView.selectRow(119, inComponent: 0, animated: true)
         tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
         tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
         sekerPickerView.selectRow(0, inComponent: 0, animated: true)
         sekerPickerView.selectRow(69, inComponent: 1, animated: true)
+        sekerPickerView.selectedRow(inComponent: 0)
     }
 }
