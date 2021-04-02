@@ -28,6 +28,8 @@ class ViewController: UIViewController {
     var sekerOrTansiyonCounter = 0
     var sekerOrTansiyonSavedCounter = 0
     
+    var timeCount = Date()
+    
     let tansiyonPickerView = UIPickerView()
     let sekerPickerView = UIPickerView()
     
@@ -80,11 +82,13 @@ class ViewController: UIViewController {
             let bigTansiyonSaved = tansiyonBigArray[tansiyonPickerView.selectedRow(inComponent: 0)]
             let littleTansiyonSaved = tansiyonLittleArray[tansiyonPickerView.selectedRow(inComponent: 1)]
             let heartBeatSaved = heartBeatArray[tansiyonPickerView.selectedRow(inComponent: 2)]
-            print("B:\(bigTansiyonSaved) K:\(littleTansiyonSaved) N:\(heartBeatSaved) ")
+            print("B:\(bigTansiyonSaved) K:\(littleTansiyonSaved) N:\(heartBeatSaved) Z: \(keepTime(date: timeCount))")
+
+            
         case 1:
             let sekerAcTokSaved = sekeractokArray[sekerPickerView.selectedRow(inComponent: 0)]
             let sekerDegerSaved = sekerdegerArray[sekerPickerView.selectedRow(inComponent: 1)]
-            print("\(sekerAcTokSaved) Şeker : \(sekerDegerSaved)")
+            print("\(sekerAcTokSaved) Şeker : \(sekerDegerSaved) Z: \(keepTime(date: timeCount))")
         default:
             print("Error")
         }
@@ -127,6 +131,14 @@ class ViewController: UIViewController {
     }
 }
 
+    func keepTime(date: Date) -> String{
+    let date = Date()
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm dd/MM/yyyy"
+    let aa = formatter.string(from: date)
+    return aa
+}
+
 
 // MARK: - ViewController: UITableViewDataSource, UITableViewDelegate -
 
@@ -138,12 +150,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TO DO: Class name change to "SaveTableViewCell"
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "saveTableViewCell") as? saveTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "SaveTableViewCell") as? SaveTableViewCell {
             cell.tansiyonSekerLabel?.text = "T:120/85 N:85"
             cell.dateHourLabel?.text = "26/02 00:02"
             return cell
         } else {
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "Test"
+            return cell
         }
     }
 }

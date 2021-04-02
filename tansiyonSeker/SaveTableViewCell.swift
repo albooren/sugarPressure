@@ -7,7 +7,7 @@
 
 import UIKit
 
-class saveTableViewCell: UITableViewCell {
+class SaveTableViewCell: UITableViewCell {
     @IBOutlet var tansiyonSekerLabel: UILabel!
     @IBOutlet var dateHourLabel: UILabel!
     
