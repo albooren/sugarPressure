@@ -147,16 +147,15 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
-    
+    // TO DO - Cell doesnt work. Fix it!
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TO DO: Class name change to "SaveTableViewCell"
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SaveTableViewCell") as? SaveTableViewCell {
             cell.tansiyonSekerLabel?.text = "T:120/85 N:85"
             cell.dateHourLabel?.text = "26/02 00:02"
             return cell
         } else {
             let cell = UITableViewCell()
-            cell.textLabel?.text = "Test"
+            cell.textLabel?.text = "Patladı"
             return cell
         }
     }
