@@ -8,18 +8,8 @@
 import UIKit
 
 class SaveTableViewCell: UITableViewCell {
-    @IBOutlet var tansiyonSekerLabel: UILabel!
-    @IBOutlet var dateHourLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var savetimeLabel: UILabel!
     
 }

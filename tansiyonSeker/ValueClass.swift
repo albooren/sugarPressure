@@ -20,8 +20,8 @@ class ValueClass : ViewController {
     static let sekerAddString = "Şeker Ekle!"
     static let saveButtonString = "Kaydet"
     
-    static let bigtansiyonString = "Büyük Tansiyon"
-    static let littletansiyonString = "Küçük Tansiyon"
+    static let bigtansiyonString = "Büyük"
+    static let littletansiyonString = "Küçük"
     static let heartBeatString = "Nabız"
     
     static let sekerDegerString = "mg/dl"
