@@ -13,26 +13,24 @@ class ViewController: UIViewController {
     @IBOutlet var feedNavigationBar: UINavigationBar!
     @IBOutlet weak var addDataBarButton: UIBarButtonItem!
     
-    var savedTansiyonArray = [TansiyonModel]()
-    var savedSekerArray = [SekerModel]()
-    
-    var containerView = UIView()
+    var tansiyonVeSekerTotalArray = [TansiyonVeSekerModel]()
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
     var heartBeatArray = Array(45...160)
+    var ilacDurumArray = ["✓","✕"]
     var sekeractokArray = ["Aç", "Tok"]
     var sekerdegerArray = Array(1...300)
-    var firstComponentCounter = 0
-    var secondComponentCounter = 0
-    var thirdComponentCounter = 0
-    var fourthComponentCounter = 0
-    var fifthComponentCounter = 0
+    var buyukTansiyonLabelCounter = 0
+    var kucukTansiyonLabelCounter = 0
+    var nabizLabelCounter = 0
+    var ilacLabelCounter = 0
+    var acTokLabelCounter = 0
+    var sekerLabelCounter = 0
     var timeCount = Date()
     var sekerOrTansiyonCounter = 0
     var sekerOrTansiyonSavedCounter = 0
+    var userDefaults = UserDefaults()
     
-    let defaults = UserDefaults.standard
-  
     let tansiyonPickerView = UIPickerView()
     let sekerPickerView = UIPickerView()
     
@@ -41,7 +39,6 @@ class ViewController: UIViewController {
         feedTableView.dataSource = self
         feedTableView.delegate = self
         feedTableView.register(UINib(nibName: "SaveTableViewCell", bundle: nil), forCellReuseIdentifier: "SaveTableViewCell")
-        view.isUserInteractionEnabled = true
         tansiyonPickerView.delegate = self
         tansiyonPickerView.dataSource = self
         sekerPickerView.delegate = self
@@ -49,8 +46,6 @@ class ViewController: UIViewController {
         tansiyonPickerView.tag = 0
         sekerPickerView.tag = 1
         setDefaultValueForTansiyonandSekerPicker()
-        let model = TansiyonModel(bTansiyon: 120, ktansiyon: 20, nabiz: 40, time: "a")
-        savedTansiyonArray.append(model)
     }
     
     @IBAction func addBarButtonClicked(_ sender: Any) {
@@ -86,14 +81,19 @@ class ViewController: UIViewController {
             let bigTansiyonSaved = tansiyonBigArray[tansiyonPickerView.selectedRow(inComponent: 0)]
             let littleTansiyonSaved = tansiyonLittleArray[tansiyonPickerView.selectedRow(inComponent: 1)]
             let heartBeatSaved = heartBeatArray[tansiyonPickerView.selectedRow(inComponent: 2)]
-            let model = TansiyonModel(bTansiyon: bigTansiyonSaved, ktansiyon: littleTansiyonSaved, nabiz: heartBeatSaved, time: keepTime(date: timeCount))
-            savedTansiyonArray.append(model)
+            let model = TansiyonVeSekerModel(bTansiyon: bigTansiyonSaved, ktansiyon: littleTansiyonSaved, nabiz: heartBeatSaved, time: keepTime(date: timeCount))
+            tansiyonVeSekerTotalArray.append(model)
             feedTableView.reloadData()
+            dismiss(animated: true, completion: nil)
         case 1:
             let sekerAcTokSaved = sekeractokArray[sekerPickerView.selectedRow(inComponent: 0)]
             let sekerDegerSaved = sekerdegerArray[sekerPickerView.selectedRow(inComponent: 1)]
-            let model = SekerModel(actok: sekerAcTokSaved, seker: sekerDegerSaved, time: keepTime(date: timeCount))
-            savedSekerArray.append(model)
+            let model = TansiyonVeSekerModel(actok: sekerAcTokSaved, seker: sekerDegerSaved, time: keepTime(date: timeCount))
+            tansiyonVeSekerTotalArray.append(model)
+            //            userdefaults.setValue(tansiyonVeSekerTotalArray, forKey: "totalArray")
+            feedTableView.reloadData()
+            sekerOrTansiyonSavedCounter = 0
+            dismiss(animated: true, completion: nil)
         default:
             print("Error")
         }
@@ -140,7 +140,7 @@ class ViewController: UIViewController {
     func keepTime(date: Date) -> String{
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm dd/MM/yyyy"
+        formatter.dateFormat = "HH:mm dd/MM"
         let time = formatter.string(from: date)
         return time
     }
@@ -152,16 +152,25 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedTansiyonArray.count
+        return tansiyonVeSekerTotalArray.count
     }
     
     
-//    - TO DO-  use sekerOrTansiyonSavedCounter to load tableview --
+    //    - TO DO-  use sekerOrTansiyonSavedCounter to load tableview --
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SaveTableViewCell") as? SaveTableViewCell {
-            cell.resultLabel.text = "B:\(savedTansiyonArray[indexPath.row].bTansiyon ?? 120) K:\(savedTansiyonArray[indexPath.row].ktansiyon ?? 80) \(savedTansiyonArray[indexPath.row].nabiz ?? 60)"
-            cell.savetimeLabel.text = "\(savedTansiyonArray[indexPath.row].time ?? "26/02 00:02")"
+            if tansiyonVeSekerTotalArray[indexPath.row].bTansiyon != nil {
+                if let buyukTansiyon = tansiyonVeSekerTotalArray[indexPath.row].bTansiyon,let kucukTansiyon = tansiyonVeSekerTotalArray[indexPath.row].ktansiyon, let nabiz = tansiyonVeSekerTotalArray[indexPath.row].nabiz {
+                    cell.resultLabel.text = "🧊\(buyukTansiyon)/\(kucukTansiyon) N:\(nabiz)"
+                    cell.savetimeLabel.text = "\(tansiyonVeSekerTotalArray[indexPath.row].time ?? "26/02 00:02")"
+                }
+            } else {
+                if let acTok = tansiyonVeSekerTotalArray[indexPath.row].actok,let seker = tansiyonVeSekerTotalArray[indexPath.row].seker  {
+                    cell.resultLabel.text = "🩸\(acTok) \(seker)mg/dl"
+                    cell.savetimeLabel.text = "\(tansiyonVeSekerTotalArray[indexPath.row].time ?? "26/02 00:02")"
+                }
+            }
             return cell
         } else {
             let cell = UITableViewCell()
@@ -172,7 +181,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            savedTansiyonArray.remove(at: indexPath.row)
+            tansiyonVeSekerTotalArray.remove(at: indexPath.row)
             feedTableView.deleteRows(at: [indexPath], with: .bottom)
             feedTableView.reloadData()
             
@@ -204,6 +213,8 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
                 return tansiyonLittleArray.count
             case 2:
                 return heartBeatArray.count
+            case 3:
+                return ilacDurumArray.count
             default:
                 return 0
             }
@@ -224,21 +235,21 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
         case 0:
             switch component {
             case 0:
-                firstComponentCounter += 1
-                if firstComponentCounter == 1 {
-                    setLabelForComponents(text: ValueClass.bigtansiyonString, xValue: pickerViev.frame.width * 0.15, yValue: pickerViev.frame.height * 0.05)
+                buyukTansiyonLabelCounter += 1
+                if buyukTansiyonLabelCounter == 1 {
+                    setLabelForComponents(text: ValueClass.bigtansiyonString, xValue: pickerViev.frame.width * 0.15, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(tansiyonBigArray[row])
             case 1:
-                secondComponentCounter += 1
-                if secondComponentCounter == 1 {
-                    setLabelForComponents(text: ValueClass.littletansiyonString, xValue: pickerViev.frame.width * 0.45, yValue: pickerViev.frame.height * 0.05)
+                kucukTansiyonLabelCounter += 1
+                if kucukTansiyonLabelCounter == 1 {
+                    setLabelForComponents(text: ValueClass.littletansiyonString, xValue: pickerViev.frame.width * 0.45, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(tansiyonLittleArray[row])
             case 2 :
-                thirdComponentCounter += 1
-                if thirdComponentCounter == 1 {
-                    setLabelForComponents(text: ValueClass.heartBeatString, xValue: pickerViev.frame.width * 0.75, yValue: pickerViev.frame.height * 0.05)
+                nabizLabelCounter += 1
+                if nabizLabelCounter == 1 {
+                    setLabelForComponents(text: ValueClass.heartBeatString, xValue: pickerViev.frame.width * 0.75, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(heartBeatArray[row])
             default:
@@ -249,9 +260,8 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
             case 0:
                 return String(sekeractokArray[row])
             case 1:
-                fifthComponentCounter += 1
-                if fifthComponentCounter == 1 {
-                    sekerOrTansiyonCounter = 1
+                acTokLabelCounter += 1
+                if acTokLabelCounter == 1 {
                     setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 0.85, yValue: pickerViev.frame.height * 0.45)
                 }
                 return String(sekerdegerArray[row])
@@ -268,7 +278,7 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
         tansiyonPickerView.selectRow(79, inComponent: 1, animated: true)
         tansiyonPickerView.selectRow(15, inComponent: 2, animated: true)
         sekerPickerView.selectRow(0, inComponent: 0, animated: true)
-        sekerPickerView.selectRow(69, inComponent: 1, animated: true)
+        sekerPickerView.selectRow(74, inComponent: 1, animated: true)
         sekerPickerView.selectedRow(inComponent: 0)
     }
 }

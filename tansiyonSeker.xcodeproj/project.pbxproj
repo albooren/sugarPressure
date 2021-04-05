@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34C978E1ED9ADD433008A7FA /* Pods_tansiyonSeker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C244CFABD0F860DBF4489FC /* Pods_tansiyonSeker.framework */; };
+		C961C0B1261BBFA0006FFB5F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C961C0B0261BBFA0006FFB5F /* ViewModel.swift */; };
 		C968E6A525E8463200A05D11 /* SaveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */; };
 		C968E6A625E8463200A05D11 /* SaveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */; };
 		C977C96425E7C213001C8368 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C977C96325E7C213001C8368 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 		0ECFACEF28FF0D399EDF7DA2 /* Pods-tansiyonSeker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tansiyonSeker.debug.xcconfig"; path = "Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker.debug.xcconfig"; sourceTree = "<group>"; };
 		2315BA0DC1736EDEDAC4DD67 /* Pods-tansiyonSeker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tansiyonSeker.release.xcconfig"; path = "Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker.release.xcconfig"; sourceTree = "<group>"; };
 		3C244CFABD0F860DBF4489FC /* Pods_tansiyonSeker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tansiyonSeker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C961C0B0261BBFA0006FFB5F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTableViewCell.swift; sourceTree = "<group>"; };
 		C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveTableViewCell.xib; sourceTree = "<group>"; };
 		C977C96025E7C213001C8368 /* tansiyonSeker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tansiyonSeker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 				C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */,
 				C977C96725E7C213001C8368 /* ViewController.swift */,
 				C99754B92619EB400087A8D2 /* Model.swift */,
+				C961C0B0261BBFA0006FFB5F /* ViewModel.swift */,
 				C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */,
 				C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */,
 				C977C96925E7C213001C8368 /* Main.storyboard */,
@@ -206,6 +209,7 @@
 				C99754BA2619EB400087A8D2 /* Model.swift in Sources */,
 				C977C96625E7C213001C8368 /* SceneDelegate.swift in Sources */,
 				C9A62E8E260F5A94007BDCC1 /* ValueClass.swift in Sources */,
+				C961C0B1261BBFA0006FFB5F /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

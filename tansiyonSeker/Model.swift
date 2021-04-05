@@ -7,36 +7,23 @@
 
 import Foundation
 
-struct TansiyonModel {
-    let bTansiyon : Int?
-    let ktansiyon : Int?
-    let nabiz : Int?
-    let time : String?
+class TansiyonVeSekerModel {
+    
+    var bTansiyon: Int?
+    var ktansiyon: Int?
+    var nabiz: Int?
+    var actok: String?
+    var seker: Int?
+    var ilac: String?
+    var time: String?
+    
+    init(bTansiyon: Int? = nil, ktansiyon: Int? = nil, nabiz: Int? = nil, actok: String? = nil, seker: Int? = nil, time: String? = nil,ilac: String? = nil) {
+        self.bTansiyon = bTansiyon
+        self.ktansiyon = ktansiyon
+        self.nabiz = nabiz
+        self.actok = actok
+        self.seker = seker
+        self.ilac = ilac
+        self.time = time
+    }
 }
-struct SekerModel {
-    let actok : String?
-    let seker : Int?
-    let time : String?
-}
-
-
-
-
-
-
-
-
-
-//var tansiyonVeSekerList = [TansiyonModel]()
-//
-//func setTansiyon() {
-//    let model = TansiyonModel(tansiyon: "15", seker: "25")
-//    tansiyonVeSekerList.append(model)
-//    print(tansiyonVeSekerList)
-//}
-//
-//}
-//struct TansiyonModel {
-//let tansiyon : String?
-//let seker : String?
-//}
