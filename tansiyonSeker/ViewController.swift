@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
     var heartBeatArray = Array(45...160)
-    var ilacDurumArray = ["✓","✕"]
     var sekeractokArray = ["Aç", "Tok"]
     var sekerdegerArray = Array(1...300)
     var buyukTansiyonLabelCounter = 0

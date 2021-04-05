@@ -14,7 +14,6 @@ class TansiyonVeSekerModel {
     var nabiz: Int?
     var actok: String?
     var seker: Int?
-    var ilac: String?
     var time: String?
     
     init(bTansiyon: Int? = nil, ktansiyon: Int? = nil, nabiz: Int? = nil, actok: String? = nil, seker: Int? = nil, time: String? = nil,ilac: String? = nil) {
@@ -23,7 +22,6 @@ class TansiyonVeSekerModel {
         self.nabiz = nabiz
         self.actok = actok
         self.seker = seker
-        self.ilac = ilac
         self.time = time
     }
 }
