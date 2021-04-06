@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var addDataBarButton: UIBarButtonItem!
     
     var tansiyonVeSekerTotalArray = [TansiyonVeSekerModel]()
+    var userSavedData = [TansiyonVeSekerModel]()
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
     var heartBeatArray = Array(45...160)
@@ -22,7 +23,6 @@ class ViewController: UIViewController {
     var buyukTansiyonLabelCounter = 0
     var kucukTansiyonLabelCounter = 0
     var nabizLabelCounter = 0
-    var ilacLabelCounter = 0
     var acTokLabelCounter = 0
     var sekerLabelCounter = 0
     var timeCount = Date()
@@ -161,7 +161,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "SaveTableViewCell") as? SaveTableViewCell {
             if tansiyonVeSekerTotalArray[indexPath.row].bTansiyon != nil {
                 if let buyukTansiyon = tansiyonVeSekerTotalArray[indexPath.row].bTansiyon,let kucukTansiyon = tansiyonVeSekerTotalArray[indexPath.row].ktansiyon, let nabiz = tansiyonVeSekerTotalArray[indexPath.row].nabiz {
-                    cell.resultLabel.text = "🧊\(buyukTansiyon)/\(kucukTansiyon) N:\(nabiz)"
+                    cell.resultLabel.text = "🩺\(buyukTansiyon)/\(kucukTansiyon) N:\(nabiz)"
                     cell.savetimeLabel.text = "\(tansiyonVeSekerTotalArray[indexPath.row].time ?? "26/02 00:02")"
                 }
             } else {
@@ -212,8 +212,6 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
                 return tansiyonLittleArray.count
             case 2:
                 return heartBeatArray.count
-            case 3:
-                return ilacDurumArray.count
             default:
                 return 0
             }
@@ -236,19 +234,19 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
             case 0:
                 buyukTansiyonLabelCounter += 1
                 if buyukTansiyonLabelCounter == 1 {
-                    setLabelForComponents(text: ValueClass.bigtansiyonString, xValue: pickerViev.frame.width * 0.15, yValue: pickerViev.frame.height * 0.03)
+                    setLabelForComponents(text: ValueClass.bigtansiyonString, xValue: pickerViev.frame.width * 0.20, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(tansiyonBigArray[row])
             case 1:
                 kucukTansiyonLabelCounter += 1
                 if kucukTansiyonLabelCounter == 1 {
-                    setLabelForComponents(text: ValueClass.littletansiyonString, xValue: pickerViev.frame.width * 0.45, yValue: pickerViev.frame.height * 0.03)
+                    setLabelForComponents(text: ValueClass.littletansiyonString, xValue: pickerViev.frame.width * 0.55, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(tansiyonLittleArray[row])
             case 2 :
                 nabizLabelCounter += 1
                 if nabizLabelCounter == 1 {
-                    setLabelForComponents(text: ValueClass.heartBeatString, xValue: pickerViev.frame.width * 0.75, yValue: pickerViev.frame.height * 0.03)
+                    setLabelForComponents(text: ValueClass.heartBeatString, xValue: pickerViev.frame.width * 0.90, yValue: pickerViev.frame.height * 0.03)
                 }
                 return String(heartBeatArray[row])
             default:
@@ -261,7 +259,8 @@ extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
             case 1:
                 acTokLabelCounter += 1
                 if acTokLabelCounter == 1 {
-                    setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 0.85, yValue: pickerViev.frame.height * 0.45)
+                    sekerOrTansiyonCounter = 1
+                    setLabelForComponents(text: ValueClass.sekerDegerString, xValue: pickerViev.frame.width * 0.95, yValue: pickerViev.frame.height * 0.45)
                 }
                 return String(sekerdegerArray[row])
             default:
