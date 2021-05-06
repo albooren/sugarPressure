@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		34C978E1ED9ADD433008A7FA /* Pods_tansiyonSeker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C244CFABD0F860DBF4489FC /* Pods_tansiyonSeker.framework */; };
+		C95037B7262E2BBD001B0D23 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C95037B6262E2BBD001B0D23 /* GoogleService-Info.plist */; };
 		C961C0B1261BBFA0006FFB5F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C961C0B0261BBFA0006FFB5F /* ViewModel.swift */; };
 		C968E6A525E8463200A05D11 /* SaveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */; };
 		C968E6A625E8463200A05D11 /* SaveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */; };
@@ -25,6 +26,7 @@
 		0ECFACEF28FF0D399EDF7DA2 /* Pods-tansiyonSeker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tansiyonSeker.debug.xcconfig"; path = "Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker.debug.xcconfig"; sourceTree = "<group>"; };
 		2315BA0DC1736EDEDAC4DD67 /* Pods-tansiyonSeker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tansiyonSeker.release.xcconfig"; path = "Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker.release.xcconfig"; sourceTree = "<group>"; };
 		3C244CFABD0F860DBF4489FC /* Pods_tansiyonSeker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tansiyonSeker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C95037B6262E2BBD001B0D23 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C961C0B0261BBFA0006FFB5F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTableViewCell.swift; sourceTree = "<group>"; };
 		C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaveTableViewCell.xib; sourceTree = "<group>"; };
@@ -69,6 +71,42 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		C90D584D2642D37400DD487A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C977C96325E7C213001C8368 /* AppDelegate.swift */,
+				C977C96525E7C213001C8368 /* SceneDelegate.swift */,
+				C977C96725E7C213001C8368 /* ViewController.swift */,
+				C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */,
+				C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C90D584E2642D37F00DD487A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C99754B92619EB400087A8D2 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C90D584F2642D38300DD487A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C961C0B0261BBFA0006FFB5F /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C90D58502642D3B000DD487A /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */,
+			);
+			path = Properties;
+			sourceTree = "<group>";
+		};
 		C977C95725E7C213001C8368 = {
 			isa = PBXGroup;
 			children = (
@@ -90,18 +128,15 @@
 		C977C96225E7C213001C8368 /* tansiyonSeker */ = {
 			isa = PBXGroup;
 			children = (
-				C977C96325E7C213001C8368 /* AppDelegate.swift */,
-				C977C96525E7C213001C8368 /* SceneDelegate.swift */,
-				C9A62E8D260F5A94007BDCC1 /* ValueClass.swift */,
-				C977C96725E7C213001C8368 /* ViewController.swift */,
-				C99754B92619EB400087A8D2 /* Model.swift */,
-				C961C0B0261BBFA0006FFB5F /* ViewModel.swift */,
-				C968E6A325E8463200A05D11 /* SaveTableViewCell.swift */,
-				C968E6A425E8463200A05D11 /* SaveTableViewCell.xib */,
+				C90D584E2642D37F00DD487A /* Model */,
+				C90D584D2642D37400DD487A /* View */,
+				C90D584F2642D38300DD487A /* ViewModel */,
+				C90D58502642D3B000DD487A /* Properties */,
 				C977C96925E7C213001C8368 /* Main.storyboard */,
 				C977C96C25E7C215001C8368 /* Assets.xcassets */,
 				C977C96E25E7C215001C8368 /* LaunchScreen.storyboard */,
 				C977C97125E7C215001C8368 /* Info.plist */,
+				C95037B6262E2BBD001B0D23 /* GoogleService-Info.plist */,
 			);
 			path = tansiyonSeker;
 			sourceTree = "<group>";
@@ -117,6 +152,7 @@
 				C977C95C25E7C213001C8368 /* Sources */,
 				C977C95D25E7C213001C8368 /* Frameworks */,
 				C977C95E25E7C213001C8368 /* Resources */,
+				CE2C2BE0976B561F94284996 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,6 +202,7 @@
 			files = (
 				C968E6A625E8463200A05D11 /* SaveTableViewCell.xib in Resources */,
 				C977C97025E7C215001C8368 /* LaunchScreen.storyboard in Resources */,
+				C95037B7262E2BBD001B0D23 /* GoogleService-Info.plist in Resources */,
 				C977C96D25E7C215001C8368 /* Assets.xcassets in Resources */,
 				C977C96B25E7C213001C8368 /* Main.storyboard in Resources */,
 			);
@@ -194,6 +231,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE2C2BE0976B561F94284996 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-tansiyonSeker/Pods-tansiyonSeker-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

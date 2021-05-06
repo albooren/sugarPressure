@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="height" constant="44" id="NhK-6z-HiA"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="NURAY KİŞİ" id="XXb-Lx-MXB">
+                                    <navigationItem title="TansiyonVeSeker" id="XXb-Lx-MXB">
                                         <barButtonItem key="rightBarButtonItem" title="Item" id="f3h-7A-an2">
                                             <imageReference key="image" image="plus" catalog="system" renderingMode="original"/>
                                             <connections>
