@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var addDataBarButton: UIBarButtonItem!
     
     var tansiyonVeSekerTotalArray = [TansiyonVeSekerModel]()
+    var dataID = [String]()
     var tansiyonBigArray = Array(1...200)
     var tansiyonLittleArray = Array(1...100)
     var heartBeatArray = Array(45...160)
@@ -89,6 +90,7 @@ class ViewController: UIViewController {
 //            let model = TansiyonVeSekerModel(bTansiyon: bigTansiyonSaved, ktansiyon: littleTansiyonSaved, nabiz: heartBeatSaved, time: keepTime(date: timeCount))
 //            tansiyonVeSekerTotalArray.append(model)
             tansiyonVeSekerTotalArray.removeAll()
+            dataID.removeAll()
             db.collection("tansiyonVeSekerData").addDocument(data: ["kTansiyon" : littleTansiyonSaved,"bTansiyon" : bigTansiyonSaved, "nabiz" : heartBeatSaved, "time" : keepTime(date: timeCount)])
 
             dismiss(animated: true, completion: nil)
@@ -96,6 +98,7 @@ class ViewController: UIViewController {
             let sekerAcTokSaved = sekeractokArray[sekerPickerView.selectedRow(inComponent: 0)]
             let sekerDegerSaved = sekerdegerArray[sekerPickerView.selectedRow(inComponent: 1)]
             tansiyonVeSekerTotalArray.removeAll()
+            dataID.removeAll()
              db.collection("tansiyonVeSekerData").addDocument(data: ["acTok" : sekerAcTokSaved,"sekerDeger" : sekerDegerSaved, "time" : keepTime(date: timeCount)])
             sekerOrTansiyonSavedCounter = 0
             dismiss(animated: true, completion: nil)
@@ -151,12 +154,14 @@ class ViewController: UIViewController {
     }
     
     func fetchData() {
-        db.collection("tansiyonVeSekerData").addSnapshotListener { (querySnapshot, error) in
+        db.collection("tansiyonVeSekerData").order(by: "time", descending: true).addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
             for document in documents {
+                let dataID = document.documentID
+                self.dataID.append(dataID)
                 if let kTansiyon = document.get("kTansiyon") as? Int,let bTansiyon = document.get("bTansiyon") as? Int,let nabiz = document.get("nabiz") as? Int, let time = document.get("time") as? String{
                     let model = TansiyonVeSekerModel(bTansiyon: bTansiyon, ktansiyon: kTansiyon,nabiz: nabiz, time: time)
                     self.tansiyonVeSekerTotalArray.append(model)
@@ -202,12 +207,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        db.collection("tansiyonVeSekerData").document(dataID[indexPath.row]).delete()
+        dataID.removeAll()
+        tansiyonVeSekerTotalArray.removeAll()
         if editingStyle == .delete {
             tansiyonVeSekerTotalArray.remove(at: indexPath.row)
             feedTableView.deleteRows(at: [indexPath], with: .bottom)
-            
             feedTableView.reloadData()
-            
         }
     }
 }
