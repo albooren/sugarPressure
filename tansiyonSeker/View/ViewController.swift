@@ -207,13 +207,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        db.collection("tansiyonVeSekerData").document(dataID[indexPath.row]).delete()
-        dataID.removeAll()
-        tansiyonVeSekerTotalArray.removeAll()
+        
         if editingStyle == .delete {
             tansiyonVeSekerTotalArray.remove(at: indexPath.row)
-            feedTableView.deleteRows(at: [indexPath], with: .bottom)
-            feedTableView.reloadData()
+            db.collection("tansiyonVeSekerData").document(dataID[indexPath.row]).delete()
+            dataID.removeAll()
+            tansiyonVeSekerTotalArray.removeAll()
         }
     }
 }
